@@ -23,7 +23,7 @@ export default class Appointment extends React.Component {
         if (this.props.match) {
             $.ajax({
                 type: 'GET',
-                url: `/appointments/${this.props.match.params.id}`,
+                url: `http://localhost:3001/appointments/${this.props.match.params.id}`,
                 dataType: 'JSON'
             }).done((data) => {
                 this.setState({appointment: data})
