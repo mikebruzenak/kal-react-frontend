@@ -20,8 +20,9 @@ export default class Appointment extends React.Component {
     }
 
     componentDidMount() {
+      console.log(sessionStorage.user)
         if (this.props.match) {
-          console.log(sessionStorage.user)
+          console.log('PROPS MATCH')
             $.ajax({
                 type: 'GET',
                 url: `http://localhost:3001/appointments/${this.props.match.params.id}`,

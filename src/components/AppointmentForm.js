@@ -28,11 +28,13 @@ export default class AppointmentForm extends React.Component{
 
     //TODO set editing
     componentDidMount() {
+      console.log(sessionStorage.user)
         if (this.props.match) {
             $.ajax({
                 type: 'GET',
                 url: `http://localhost:3001/appointments/${this.props.match.params.id}`,
-                dataType: 'JSON'
+                dataType: 'JSON',
+                headers: JSON.parse(sessionStorage.user)
             }).done((data) => {
                 this.setState({
                     title: {value:data.title, validations: true},
