@@ -91,6 +91,7 @@ export default class AppointmentForm extends React.Component{
 
     handleFormSubmit = (e) => {
         e.preventDefault()
+        console.log(sessionStorage.user)
         if( this.props.match !== undefined && this.props.match.path === '/appointments/:id/edit') {
             this.updateAppointment()
         } else {
@@ -100,7 +101,12 @@ export default class AppointmentForm extends React.Component{
 
     addAppointment = () => {
         const appointment = {title: this.state.title.value, appt_time: this.state.appt_time.value};
-        $.post('http://localhost:3001/appointments', {appointment: appointment})
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3001/appointments',
+            data: {appointment: appointment},
+            headers: JSON.parse(sessionStorage.user)
+          })
             .done((data) => {
             console.log('Added!')
                 this.props.handleNewAppointment(data)
@@ -118,7 +124,8 @@ export default class AppointmentForm extends React.Component{
         $.ajax({
             type: 'PATCH',
             url: `http://localhost:3001/appointments/${this.props.match.params.id}`,
-            data: {appointment: appointment}
+            data: {appointment: appointment},
+            headers: JSON.parse(sessionStorage.user)
         })
             .done((data) => {
             console.log('Updated!')
