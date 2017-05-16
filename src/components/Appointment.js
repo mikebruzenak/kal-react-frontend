@@ -20,14 +20,12 @@ export default class Appointment extends React.Component {
     }
 
     componentDidMount() {
-      console.log(sessionStorage.user)
         if (this.props.match) {
-          console.log('PROPS MATCH')
             $.ajax({
                 type: 'GET',
                 url: `http://localhost:3001/appointments/${this.props.match.params.id}`,
                 dataType: 'JSON',
-                headers: JSON.parse(sessionStorage.user)
+                headers: JSON.parse(sessionStorage.getItem('user'))
             }).done((data) => {
                 this.setState({appointment: data})
             })
