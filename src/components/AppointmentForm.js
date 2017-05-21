@@ -10,7 +10,7 @@ import './react-datetime.css'
 
 
 export default class AppointmentForm extends React.Component{
-    static propTypes = {
+    static propTypes={
         handleNewAppointment: PropTypes.func
     }
 
@@ -28,13 +28,13 @@ export default class AppointmentForm extends React.Component{
 
     //TODO set editing
     componentDidMount() {
-      console.log(sessionStorage.user)
+      console.log(sessionStorage.getItem('user'))
         if (this.props.match) {
             $.ajax({
                 type: 'GET',
                 url: `http://localhost:3001/appointments/${this.props.match.params.id}`,
                 dataType: 'JSON',
-                headers: JSON.parse(sessionStorage.user)
+                headers: JSON.parse(sessionStorage.getItem('user'))
             }).done((data) => {
                 this.setState({
                     title: {value:data.title, validations: true},
@@ -93,7 +93,7 @@ export default class AppointmentForm extends React.Component{
 
     handleFormSubmit = (e) => {
         e.preventDefault()
-        console.log(sessionStorage.user)
+        console.log(sessionStorage.getItem('user'))
         if( this.props.match !== undefined && this.props.match.path === '/appointments/:id/edit') {
             this.updateAppointment()
         } else {
@@ -107,7 +107,7 @@ export default class AppointmentForm extends React.Component{
             type: 'POST',
             url: 'http://localhost:3001/appointments',
             data: {appointment: appointment},
-            headers: JSON.parse(sessionStorage.user)
+            headers: JSON.parse(sessionStorage.getItem('user'))
           })
             .done((data) => {
             console.log('Added!')
@@ -127,7 +127,7 @@ export default class AppointmentForm extends React.Component{
             type: 'PATCH',
             url: `http://localhost:3001/appointments/${this.props.match.params.id}`,
             data: {appointment: appointment},
-            headers: JSON.parse(sessionStorage.user)
+            headers: JSON.parse(sessionStorage.getItem('user'))
         })
             .done((data) => {
             console.log('Updated!')
@@ -144,7 +144,7 @@ export default class AppointmentForm extends React.Component{
         $.ajax({
             type: 'DELETE',
             url: `http://localhost:3001/appointments/${this.props.match.params.id}`,
-            headers: JSON.parse(sessionStorage.user)
+            headers: JSON.parse(sessionStorage.getItem('user'))
         })
             .done((data) => {
                 console.log('Appointment deleted!')
