@@ -36,13 +36,24 @@ export default class extends React.Component {
     if(sessionStorage.getItem('user')) {
       return (
         <div>
-          <p>
-            {JSON.parse(sessionStorage.getItem('user')).uid}
-            <a href="#" onClick={this.handleSignout}>Sign out</a>
-          </p>
-          <Link to='/'>
-            <h1>CalReact</h1>
-          </Link>
+          <Navbar inverse fixedTop>
+            <Grid>
+              <Navbar.Header>
+                  <Navbar.Brand>
+                    <Link to='/'>
+                      <h1>CalReact</h1>
+                    </Link>
+                  </Navbar.Brand>
+                  <Navbar.Toggle />
+              </Navbar.Header>
+              <Navbar.Collapse>
+                <Nav pullRight>
+                  <NavItem>{JSON.parse(sessionStorage.getItem('user')).uid} </NavItem>
+                  <NavItem eventKey={2} href="#" onClick={this.handleSignout}>Sign out </NavItem>
+                </Nav>
+              </Navbar.Collapse>
+            </Grid>
+            </Navbar>
         </div>
       )
     } else {
