@@ -53,7 +53,7 @@ export default class extends React.Component {
                 </Nav>
               </Navbar.Collapse>
             </Grid>
-            </Navbar>
+           </Navbar>
         </div>
       )
     } else {
