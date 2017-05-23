@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import $ from 'jquery'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
+import { Grid, Navbar, Nav, NavItem } from 'react-bootstrap'
 
 export default class extends React.Component {
 
